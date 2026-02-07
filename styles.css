@@ -20,14 +20,14 @@ body{
   color: var(--text);
 
   display: flex;
-  justify-content: center;   /* centers horizontally */
+  justify-content: center;   
 }
 
 
 .app{
   width: 100%;
-  max-width: 520px;     /* or whatever you chose */
-  margin: 0 auto;       /* THIS centers it */
+  max-width: 520px;  
+  margin: 0 auto;       
   min-height: 100vh;
   display:flex;
   flex-direction:column;
@@ -112,7 +112,6 @@ body{
   font-weight: 600;
 }
 
-/* Score circle */
 .scoreWrap{
   display:flex;
   flex-direction:column;
@@ -133,7 +132,6 @@ body{
   box-shadow: inset 0 0 0 10px rgba(67,163,95,.12);
 }
 
-/* <=25 light red */
 .ring.low{
   background:
     radial-gradient(circle at center, #ffffff 58%, transparent 59%),
@@ -141,7 +139,6 @@ body{
   box-shadow: inset 0 0 0 10px rgba(201,59,59,.15);
 }
 
-/* 26-50 light yellow */
 .ring.mid{
   background:
     radial-gradient(circle at center, #ffffff 58%, transparent 59%),
@@ -149,7 +146,6 @@ body{
   box-shadow: inset 0 0 0 10px rgba(227,194,59,.18);
 }
 
-/* 51+ light green */
 .ring.high{
   background:
     radial-gradient(circle at center, #ffffff 58%, transparent 59%),
@@ -194,7 +190,6 @@ body{
   margin-bottom: 6px;
 }
 
-/* Streak */
 .streak{
   display:flex;
   align-items:center;
@@ -234,7 +229,6 @@ body{
   cursor:pointer;
 }
 
-/* Highlights */
 .hlRow{ display:flex; flex-direction:column; gap:10px; }
 .hlItem{
   display:flex;
@@ -293,7 +287,6 @@ body{
   line-height: 1.4;
 }
 
-/* Overlay + Sidebar */
 .overlay{
   position: fixed;
   inset: 0;
@@ -368,11 +361,9 @@ body.menuOpen .sidebar{
   transform: translateX(0);
 }
 
-/* Pages */
 .page{ display:none; }
 .page.active{ display:block; }
 
-/* ----- LOG PAGE UI ----- */
 .logGrid{
   display: grid;
   gap: 12px;
@@ -453,7 +444,6 @@ body.menuOpen .sidebar{
   color: var(--muted);
 }
 
-/* A/C hours input */
 .acInput{
   border: 1px solid #e7efe9;
   background: #f6faf7;
@@ -479,7 +469,6 @@ body.menuOpen .sidebar{
   margin-top: 4px;
 }
 
-/* ===== Impact Page ===== */
 .statsRow{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -535,7 +524,7 @@ body.menuOpen .sidebar{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  padding:12px 14px;   /* tighter */
+  padding:12px 14px;  
   border-radius:16px;
   border:1px solid #e7efe9;
   background:#f6faf7;
@@ -616,20 +605,17 @@ body.menuOpen .sidebar{
   margin-right: -14px;
 }
 
-/* Expand the "What impacted your score most" card horizontally */
 #page-impact .card:nth-of-type(2){
   margin-left: -14px;
   margin-right: -14px;
 }
 
-/* Force the "What impacted your score most" card to be wider horizontally */
 #impactWideCard{
-  width: calc(100% + 28px);   /* 14px left + 14px right */
+  width: calc(100% + 28px);   
   transform: translateX(-14px);
 }
 
 
-/* ===== Badges / Achievements ===== */
 .summaryGrid{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -741,4 +727,41 @@ body.menuOpen .sidebar{
   border:1px solid #e7efe9;
   background:#ffffff;
   color: var(--text);
+}
+
+
+html, body{
+  width: 100%;
+  overflow-x: hidden;   
+}
+
+.app{
+  width: 100%;
+  max-width: 520px;     
+  margin: 0 auto;
+}
+
+@media (max-width: 430px){
+  .impactGrid{
+    grid-template-columns: 1fr; 
+  }
+
+  .badgeGrid{
+    grid-template-columns: 1fr;
+  }
+
+  .statsRow{
+    grid-template-columns: 1fr; 
+  }
+}
+
+.impactItem, .hlItem, .catBox{
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.impactName, .hlText .main{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
