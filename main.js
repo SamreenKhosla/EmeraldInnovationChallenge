@@ -358,7 +358,6 @@ function drawWeekChart(svg, scores){
   });
 }
 
-// ================= SAVE TODAY =================
 function saveToday(){
   const key = todayKey();
   const { chosen, score, acHours } = computeFromSelections();
