@@ -20,7 +20,7 @@ body{
   color: var(--text);
 
   display: flex;
-  justify-content: center;   
+  justify-content: center;   /* centers horizontally */
 }
 
 
@@ -729,39 +729,3 @@ body.menuOpen .sidebar{
   color: var(--text);
 }
 
-
-html, body{
-  width: 100%;
-  overflow-x: hidden;   
-}
-
-.app{
-  width: 100%;
-  max-width: 520px;     
-  margin: 0 auto;
-}
-
-@media (max-width: 430px){
-  .impactGrid{
-    grid-template-columns: 1fr; 
-  }
-
-  .badgeGrid{
-    grid-template-columns: 1fr;
-  }
-
-  .statsRow{
-    grid-template-columns: 1fr; 
-  }
-}
-
-.impactItem, .hlItem, .catBox{
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.impactName, .hlText .main{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
