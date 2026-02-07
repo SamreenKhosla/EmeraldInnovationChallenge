@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoScore</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="row">
+        <button class="iconBtn" id="menuBtn" aria-label="Open menu">☰</button>
+        <div class="brand">EcoScore</div>
+        <div class="datepill" id="todayPill">Today</div>
+      </div>
+    </header>
+
+    <!-- Overlay + Sidebar -->
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebarHeader">
+        <div class="sidebarTitle">Menu</div>
+        <button class="iconBtnDark" id="closeBtn" aria-label="Close menu">✕</button>
+      </div>
+
+      <button class="sideLink active" data-target="home">🏠 Home</button>
+      <button class="sideLink" data-target="log">✅ Log</button>
+      <button class="sideLink" data-target="impact">📈 Stats</button>
+      <button class="sideLink" data-target="badges">🏅 Badges</button>
+
+      <div class="sidebarFooter">
+        <small>EcoScore • Hackathon Demo</small>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+      <!-- HOME PAGE -->
+      <section class="page active" id="page-home">
+
+        <!-- SCORE CARD -->
+        <div class="card">
+          <p class="title">Your EcoScore Today</p>
+
+          <div class="scoreWrap">
+            <div class="ring" id="scoreRing" style="--p:0">
+              <div class="ringInner">
+                <div class="score" id="scoreNum">0</div>
+                <div class="scoreLabel" id="scoreWord">Good</div>
+              </div>
+            </div>
+
+            <div class="subline">
+              <span>Change: <strong id="scoreChange">+0</strong></span>
+              <span>•</span>
+              <span>Tip: more positives = higher score</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STREAK -->
+        <div class="card">
+          <p class="title">Streak</p>
+          <div class="streak">
+            <div class="streakLeft">
+              <div class="streakIcon">🔥</div>
+              <div class="streakText">
+                <div class="big"><span id="streakDays">0</span> day streak</div>
+                <div class="small">Log daily to keep it going</div>
+              </div>
+            </div>
+            <button class="streakBtn" id="logTodayBtn">Log today</button>
+          </div>
+        </div>
+
+        <!-- HIGHLIGHTS -->
+        <div class="card">
+          <p class="title">Key highlights (most impact)</p>
+          <div class="hlRow" id="highlightsList"></div>
+        </div>
+
+      </section>
+
+      <!-- LOG PAGE -->
+      <section class="page" id="page-log">
+        <div class="card">
+          <p class="title">Log your day</p>
+
+          <div class="logGrid">
+
+            <!-- FOOD -->
+            <div class="logSection">
+              <div class="secHeader">
+                <div class="secTitle">🥗 Food</div>
+                <div class="secHint">Choose what applies</div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" data-name="Vegetarian meal" data-cat="Food" data-points="10" data-emoji="🥗">
+                Vegetarian meal (+10)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Local/seasonal food" data-cat="Food" data-points="6" data-emoji="🍎">
+                Local/seasonal food (+6)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Saved leftovers" data-cat="Food" data-points="8" data-emoji="🥡">
+                Saved leftovers (+8)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Meat" data-cat="Food" data-points="-12" data-emoji="🥩">
+                Meat(−12)
+              </label>
+            </div>
+
+            <!-- TRANSPORT -->
+            <div class="logSection">
+              <div class="secHeader">
+                <div class="secTitle">🚲 Transport</div>
+                <div class="secHint">Pick one</div>
+              </div>
+
+              <label class="radio">
+                <input type="radio" name="transport" data-name="Walked/Biked" data-cat="Transport" data-points="15" data-emoji="🚲">
+                Walked / biked (+15)
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="transport" data-name="Public transit" data-cat="Transport" data-points="10" data-emoji="🚌">
+                Public transit (+10)
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="transport" data-name="Carpooled" data-cat="Transport" data-points="8" data-emoji="🚗">
+                Carpooled (+8)
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="transport" data-name="Car alone" data-cat="Transport" data-points="-10" data-emoji="🚙">
+                Car alone (−10)
+              </label>
+            </div>
+
+            <!-- ENERGY -->
+            <div class="logSection">
+              <div class="secHeader">
+                <div class="secTitle">⚡ Energy</div>
+                <div class="secHint">Home/school energy</div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" data-name="Turned off lights" data-cat="Energy" data-points="5" data-emoji="💡">
+                Turned off unused lights (+5)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Short shower" data-cat="Energy" data-points="4" data-emoji="🚿">
+                Short shower (+4)
+              </label>
+
+              <!-- A/C hours input -->
+              <div class="acInput">
+                <label class="acLabel">❄️ A/C usage (hours)</label>
+                <input type="number" min="0" step="0.5" placeholder="0" id="acHours" />
+                <div class="acHint">−5 points per hour</div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" data-name="Charged devices efficiently" data-cat="Energy" data-points="3" data-emoji="🔌">
+                Charged devices efficiently (+3)
+              </label>
+            </div>
+
+            <!-- WASTE -->
+            <div class="logSection">
+              <div class="secHeader">
+                <div class="secTitle">♻️ Waste</div>
+                <div class="secHint">Reduce / reuse / recycle</div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" data-name="Recycled" data-cat="Waste" data-points="5" data-emoji="♻️">
+                Recycled (+5)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Reusable bottle" data-cat="Waste" data-points="6" data-emoji="🧴">
+                Used reusable bottle (+6)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Reusable bag" data-cat="Waste" data-points="4" data-emoji="🛍️">
+                Used reusable bag (+4)
+              </label>
+
+              <label class="check">
+                <input type="checkbox" data-name="Disposable plastics" data-cat="Waste" data-points="-6" data-emoji="🧃">
+                Used disposable plastics (−6)
+              </label>
+            </div>
+
+          </div>
+
+          <div class="logActions">
+            <button class="btnGhost" id="resetBtn">Reset</button>
+            <button class="btnPrimary" id="saveBtn">Save Today</button>
+          </div>
+
+          <div class="tiny" id="saveMsg"></div>
+        </div>
+      </section>
+
+      <!-- IMPACT PAGE -->
+      <section class="page" id="page-impact">
+
+  <div class="card">
+    <p class="title">Weekly stats</p>
+
+    <div class="statsRow">
+      <div class="statBox">
+        <div class="statNum" id="wkTotal">0</div>
+        <div class="statLabel">Total</div>
+      </div>
+      <div class="statBox">
+        <div class="statNum" id="wkAvg">0</div>
+        <div class="statLabel">Avg / day</div>
+      </div>
+      <div class="statBox">
+        <div class="statNum" id="wkBest">0</div>
+        <div class="statLabel">Best day</div>
+      </div>
+    </div>
+  </div>
+
+<div class="card" id="impactWideCard">
+    <p class="title">What impacted your score most</p>
+
+    <div class="impactGrid">
+      <div class="impactCol">
+        <div class="impactHeading">Top positives</div>
+        <div class="impactList" id="topPos"></div>
+      </div>
+
+      <div class="impactCol">
+        <div class="impactHeading">Top negatives</div>
+        <div class="impactList" id="topNeg"></div>
+      </div>
+    </div>
+
+    <div class="catRow">
+      <div class="catBox"><span>Food</span><strong id="catFood">0</strong></div>
+      <div class="catBox"><span>Transport</span><strong id="catTransport">0</strong></div>
+      <div class="catBox"><span>Energy</span><strong id="catEnergy">0</strong></div>
+      <div class="catBox"><span>Waste</span><strong id="catWaste">0</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="title">Weekly progress</p>
+
+    <div class="chartWrap">
+      <svg id="weekChart" viewBox="0 0 320 140" preserveAspectRatio="none"></svg>
+      <div class="chartLabels">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+      <!-- BADGES PAGE -->
+      <section class="page" id="page-badges">
+
+  <div class="card">
+    <p class="title">Achievements</p>
+
+    <div class="summaryGrid" id="badgeSummary">
+      <div class="summaryBox">
+        <div class="summaryNum" id="sumEarned">0</div>
+        <div class="summaryLabel">Earned</div>
+      </div>
+
+      <div class="summaryBox">
+        <div class="summaryNum" id="sumLogged">0</div>
+        <div class="summaryLabel">Days logged</div>
+      </div>
+
+      <div class="summaryBox">
+        <div class="summaryNum" id="sumStreak">0</div>
+        <div class="summaryLabel">Streak 🔥</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="title">Your badges</p>
+    <div class="badgeGrid" id="badgeGrid"></div>
+  </div>
+
+</section>
+
+
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
