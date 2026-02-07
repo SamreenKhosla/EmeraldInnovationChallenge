@@ -729,3 +729,38 @@ body.menuOpen .sidebar{
   color: var(--text);
 }
 
+.impactGrid{
+  width: 100%;
+}
+
+.impactList{
+  min-width: 0;
+}
+
+.impactItem{
+  width: 100%;
+  min-width: 0;       
+  max-width: 100%;
+  overflow: hidden;      
+}
+
+.impactLeft{
+  min-width: 0;    
+  max-width: 100%;
+}
+
+.impactName{
+  min-width: 0;        
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;  
+}
+
+.impactDelta{
+  flex: 0 0 auto;
+  max-width: 90px;
+}
+
+html, body{
+  overflow-x: hidden;
+}
